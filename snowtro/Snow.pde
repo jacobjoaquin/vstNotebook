@@ -5,14 +5,14 @@ class Snow extends DisplayableList {
       update();
     }
   }
-  
+
   void update() {
     if (random(1.0) < 0.25) {
       createFlake();
     }
     super.update();
   }
-  
+
   void createFlake() {
     this.add(new Flake());
   }
@@ -25,7 +25,7 @@ class Flake extends DisplayableBase {
   float flutter = 1;
   float r;
   color c;
-  
+
   Flake() {
     super();
     position = new PVector(random(width), 0);
@@ -35,7 +35,7 @@ class Flake extends DisplayableBase {
     flutter *= r;
     c = color(r > 0.6 ? 255 : 127);
   }
-  
+
   void update() {
     super.update();
     lastPosition = position.copy();
@@ -50,7 +50,7 @@ class Flake extends DisplayableBase {
     if (position.y >= height) {
       complete();
     }
-    
+
     if (position.x < 0) {
       position.x += width;
       lastPosition.x += width;
@@ -59,8 +59,25 @@ class Flake extends DisplayableBase {
       position.x -= width;
       lastPosition.x -= width;
     }
+
+    int x1 = round(position.x);
+    x1 = x1 < 0 ? 0 : x1;
+    x1 = x1 >= width - 1 ? width - 1 : x1;
+    if (x1 < snowLine.positions.size() && x1 >= 0) {
+      int x0 = x1 - 1 + (x1 == 0 ? 1 : 0);
+      int x2 = x1 + 1 - (x1 == width - 1 ? width : 0);
+      PVector p0 = snowLine.positions.get(x0);
+      PVector p1 = snowLine.positions.get(x1);
+      PVector p2 = snowLine.positions.get(x2);
+      if (position.y >= p2.y) {
+        p2.y -= 1;
+        p1.y -= 1;
+        p0.y -= 1;
+        complete();
+      }
+    }
   }
-  
+
   void display() {
     push();
     stroke(c);
