@@ -12,7 +12,7 @@ void setup() {
   frameRate(25);
   vst = new Vst(this, createSerial());
   vst.colorBright = color(220, 220, 255);
-  vst.colorNormal = color(vst.colorBright, 96);
+  vst.colorNormal = color(vst.colorBright, 128);
   vst.colorTransit = color(255, 0, 0, 64);
   //vst.displayTransit = true;
 
@@ -32,14 +32,4 @@ void draw() {
   vst.display();
   //println(snowLine.positions.size());
   println(snow.size() + snowLine.positions.size());
-}
-
-void push() {
-  pushMatrix();
-  pushStyle();
-}
-
-void pop() {
-  popStyle();
-  popMatrix();
 }

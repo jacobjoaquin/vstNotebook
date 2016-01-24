@@ -18,7 +18,7 @@ class SnowLine extends DisplayableBase {
   }
 
   void display() {
-    push();
+    pushStyle();
     stroke(127);
 
     vst.beginShape();
@@ -43,6 +43,6 @@ class SnowLine extends DisplayableBase {
     //}
 
     vst.endShape();
-    pop();
+    popStyle();
   }
 }

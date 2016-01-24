@@ -88,9 +88,9 @@ class Flake extends DisplayableBase {
   }
 
   void display() {
-    push();
+    pushStyle();
     stroke(c);
     vst.line(lastPosition.x, lastPosition.y, position.x, position.y);
-    pop();
+    popStyle();
   }
 }
