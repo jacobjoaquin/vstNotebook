@@ -1,12 +1,13 @@
 class Snow extends DisplayableList {
   void init() {
+    // Populates screen with snow.
     for (int i = 0; i < height * 8; i++) {
       update();
     }
   }
   
   void update() {
-    if (random(1.0) < 0.5) {
+    if (random(1.0) < 0.25) {
       createFlake();
     }
     super.update();
@@ -21,7 +22,7 @@ class Flake extends DisplayableBase {
   PVector position;
   PVector lastPosition;
   PVector velocity;
-  float flutter = 2;
+  float flutter = 1;
   float r;
   color c;
   
