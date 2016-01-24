@@ -25,11 +25,12 @@ void setup() {
 void draw() {
   background(0);
   wind.update();
-  snowLine.update();
   snow.update();
+  snowLine.update();
   snow.display();
   snowLine.display();
   vst.display();
+  //println(snowLine.positions.size());
   println(snow.size() + snowLine.positions.size());
 }
 

@@ -41,8 +41,6 @@ class Flake extends DisplayableBase {
     lastPosition = position.copy();
     position.add(velocity);
     PVector w = wind.velocity.copy();
-    //w.y *= r;
-    //w.x *= w;
     w.mult(r);
     w.x += random(-flutter, flutter);
     position.add(w);
@@ -60,19 +58,30 @@ class Flake extends DisplayableBase {
       lastPosition.x -= width;
     }
 
+
+    // TODO: Clean this mess up!!
+    float snowAmt = 0.5;
     int x1 = round(position.x);
     x1 = x1 < 0 ? 0 : x1;
     x1 = x1 >= width - 1 ? width - 1 : x1;
     if (x1 < snowLine.positions.size() && x1 >= 0) {
-      int x0 = x1 - 1 + (x1 == 0 ? 1 : 0);
-      int x2 = x1 + 1 - (x1 == width - 1 ? width : 0);
+      int x0 = x1 - 1;
+      x0 = x0 < 0 ? width - 1 : x0;
+      int x2 = x1;
+      x2 = x2 >= width - 1 ? 0 : x2;
       PVector p0 = snowLine.positions.get(x0);
       PVector p1 = snowLine.positions.get(x1);
       PVector p2 = snowLine.positions.get(x2);
-      if (position.y >= p2.y) {
-        p2.y -= 1;
-        p1.y -= 1;
-        p0.y -= 1;
+      if (position.y >= p1.y || position.y >= p0.y || position.y >= p2.y) {
+        if (p0.y > p1.y || p2.y > p1.y) {
+          if (p0.y > p2.y) {
+            p0.y -= snowAmt;
+          } else {
+            p2.y -= snowAmt;
+          }
+        } else {
+          p1.y -= snowAmt;
+        }
         complete();
       }
     }
