@@ -113,12 +113,12 @@ void draw() {
   phase += phaseInc;
   phase -= int(phase);
 
-  if (captureFrames) {
-    //    saveFrame("./gif/f#####.gif");
-    if (frameCount == nFrames - 1) {
-      exit();
-    }
-  }
+  //if (captureFrames) {
+  //  //    saveFrame("./gif/f#####.gif");
+  //  if (frameCount == nFrames - 1) {
+  //    exit();
+  //  }
+  //}
 }
 
 void printPoints(float x1, float y1, float x2, float y2) {
@@ -127,4 +127,3 @@ void printPoints(float x1, float y1, float x2, float y2) {
   pw.print("," + x2);
   pw.print("," + y2);
 }
-
