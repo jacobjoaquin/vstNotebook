@@ -60,7 +60,7 @@ class Flake extends DisplayableBase {
 
 
     // TODO: Clean this mess up!!
-    float snowAmt = 0.5;
+    float snowAmt = 1;
     int x1 = round(position.x);
     x1 = x1 < 0 ? 0 : x1;
     x1 = x1 >= width - 1 ? width - 1 : x1;
