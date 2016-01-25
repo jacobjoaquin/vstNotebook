@@ -5,7 +5,7 @@ float phaseInc = 1.0 / nFrames;
 Vst vst;
 void settings() {
   size(450, 550, P3D);
-  //pixelDensity(displayDensity());
+  pixelDensity(displayDensity());
 }
 
 void setup() {
@@ -29,6 +29,7 @@ void draw() {
   stroke(255);
   line(260, -5000, maxDepth, 260, height, maxDepth);
   line(240, -5000, maxDepth, 240, height, maxDepth);
+  line(-sideLength, height, maxDepth, sideLength, height, maxDepth);
 
   stroke(127);
   pushMatrix();
@@ -46,9 +47,4 @@ void draw() {
   vst.display();
   phase += phaseInc;  
   phase -= (int) phase;
-  
-  saveFrame("./gif/f######.gif");
-  if (frameCount == nFrames) {
-    exit();
-  }
 }
