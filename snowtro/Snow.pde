@@ -1,7 +1,7 @@
 class Snow extends DisplayableList {
   void init() {
     // Populates screen with snow.
-    for (int i = 0; i < height * 8; i++) {
+    for (int i = 0; i < height * 1; i++) {
       update();
     }
   }
@@ -52,15 +52,38 @@ class Flake extends DisplayableBase {
     if (position.x < 0) {
       position.x += width;
       lastPosition.x += width;
-    }
-    if (position.x >= width - 1) {
+    } else if (position.x >= width - 1) {
       position.x -= width;
       lastPosition.x -= width;
     }
 
+    snowRound2();
+  }
 
+  void snowRound2() {
+    float curve[] = {0.1, 0.2, 0.25, 0.275, 0.25, 0.2, 0.1};
+    int x = round(position.x);
+    x = x < 0 ? 0 : x;
+    x = x >= width - 1 ? width - 1 : x;
+    PVector slp = snowLine.positions.get(x);
+    if (position.y > slp.y) {
+      if (position.y < slp.y + 2) {
+        for (int i = 0; i < curve.length; i++) {
+          int index = (i - 3 + x);
+          if (index < 0 || index >= width) {
+          } else {
+            PVector p = snowLine.positions.get(index);
+            p.y -= curve[i];
+          }
+        }
+      }
+      complete();
+    }
+  }
+
+  void snowRound1() {
     // TODO: Clean this mess up!!
-    float snowAmt = 1;
+    float snowAmt = 0.5;
     int x1 = round(position.x);
     x1 = x1 < 0 ? 0 : x1;
     x1 = x1 >= width - 1 ? width - 1 : x1;
@@ -76,17 +99,20 @@ class Flake extends DisplayableBase {
         if (p0.y > p1.y || p2.y > p1.y) {
           if (p0.y > p2.y) {
             p0.y -= snowAmt;
+            p2.y -= snowAmt * 0.5;
           } else {
             p2.y -= snowAmt;
+            p0.y -= snowAmt * 0.5;
           }
         } else {
           p1.y -= snowAmt;
+          p0.y -= snowAmt * 0.5;
+          p2.y -= snowAmt * 0.5;
         }
         complete();
       }
     }
   }
-
   void display() {
     pushStyle();
     stroke(c);

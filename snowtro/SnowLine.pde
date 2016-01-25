@@ -1,6 +1,7 @@
 class SnowLine extends DisplayableBase {
   ArrayList<PVector> positions;
   private float startY = height * 0.875;
+  private float h = 300;
 
   SnowLine() {
     super();
@@ -12,7 +13,7 @@ class SnowLine extends DisplayableBase {
     float n = 0;
     float nInc = 0.01;
     for (int i = 0; i < width; i++) {
-      positions.add(new PVector(i, startY - noise(n) * 150));
+      positions.add(new PVector(i, startY - noise(n) * h));
       n += nInc;
     }
   }
@@ -22,15 +23,15 @@ class SnowLine extends DisplayableBase {
     stroke(127);
 
     vst.beginShape();
-    //for (PVector p : positions) {
-    //vst.vertex(p.x, p.y);
-    //}
-
-    for (int i = 1; i < positions.size(); i += 2) {
-     PVector p0 = (PVector) positions.get(i - 1);
-     PVector p1 = (PVector) positions.get(i);
-     vst.vertex(p0.x, (p0.y + p1.y) * 0.5);
+    for (PVector p : positions) {
+     vst.vertex(p.x, p.y);
     }
+
+    //for (int i = 1; i < positions.size(); i += 2) {
+    // PVector p0 = (PVector) positions.get(i - 1);
+    // PVector p1 = (PVector) positions.get(i);
+    // vst.vertex(p0.x, (p0.y + p1.y) * 0.5);
+    //}
 
     //for (int i = 4; i < positions.size(); i += 4) {
     //  float y = 0;
