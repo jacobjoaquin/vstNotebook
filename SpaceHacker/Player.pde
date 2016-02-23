@@ -31,7 +31,7 @@ class Player extends Being {
       acceleration.add(a);
     }
     if (inputHandler.isPressed(Keys.BACKWARD)) {
-      PVector a = PVector.fromAngle(-angle);
+      PVector a = PVector.fromAngle(angle - PI);
       acceleration.add(a);
     }
     if (inputHandler.isPressed(Keys.FIRE)) {
@@ -46,7 +46,6 @@ class Player extends Being {
 
   void display() {
     pushMatrix();
-    //translate(width / 2.0, height / 2.0);
     pushStyle();
     noFill();
     stroke(brightness);
