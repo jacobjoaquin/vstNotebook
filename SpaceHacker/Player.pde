@@ -1,9 +1,12 @@
-class Player extends DisplayableBase {
+abstract class Being extends DisplayableBase {
   float brightness = 128;
   float angle = -HALF_PI;
   PVector acceleration;
   PVector velocity;
   PVector position;
+}
+
+class Player extends Being {
   boolean showFlame = true;
   private float rotateAmount = 0.1;
 
@@ -30,6 +33,10 @@ class Player extends DisplayableBase {
     if (inputHandler.isPressed(Keys.BACKWARD)) {
       PVector a = PVector.fromAngle(-angle);
       acceleration.add(a);
+    }
+    if (inputHandler.isPressed(Keys.FIRE)) {
+      Projectile p = new PlayerLaser(this);
+      projectiles.add(p);
     }
     
     velocity.add(acceleration);

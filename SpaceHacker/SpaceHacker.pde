@@ -2,6 +2,7 @@ Vst vst;
 Player player;
 InputHandler inputHandler;
 Level level;
+Projectiles projectiles;
 
 void settings() {
   size(450, 550, P2D);
@@ -17,6 +18,7 @@ void setup() {
   player = new Player();
   inputHandler = new InputHandler();
   level = new RandomLevel();
+  projectiles = new Projectiles();
 }
 
 void draw() {
@@ -27,16 +29,20 @@ void draw() {
 
   level.update();
   player.update();
-
+  projectiles.update();
 
   pushMatrix();
-  //translate(width / 2.0, height / 2.0);
-  translate(-player.position.x, -player.position.y);  
+  translate(width / 2.0, height / 2.0);
+  translate(-player.position.x, -player.position.y);
+  stroke(128);
+  rect(0, 0, 4000, 4000);
   level.display();
+  projectiles.display();
   popMatrix();
-  
-  
+  pushMatrix();
+  translate(width / 2.0, height / 2.0);
   player.display();
+  popMatrix();
   vst.display();
 
   inputHandler.clearReleased();
