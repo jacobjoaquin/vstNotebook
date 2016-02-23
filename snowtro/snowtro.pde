@@ -15,6 +15,7 @@ void setup() {
   vst.colorNormal = color(vst.colorBright, 128);
   vst.colorTransit = color(255, 0, 0, 64);
   //vst.displayTransit = true;
+  blendMode(ADD);
 
   wind = new Wind();
   snow = new Snow();

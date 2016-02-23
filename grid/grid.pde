@@ -31,7 +31,7 @@ void draw() {
   vst.line(255, -5000, maxDepth, 255, height, maxDepth);
   vst.line(245, -5000, maxDepth, 245, height, maxDepth);
   vst.line(-sideLength, height, maxDepth, sideLength, height, maxDepth);
-  
+
   // Grid
   stroke(127);
   for (int i = (int) -sideLength; i <= sideLength; i += tileSize) { 
